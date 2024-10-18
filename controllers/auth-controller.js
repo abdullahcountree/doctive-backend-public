@@ -2,8 +2,8 @@ const User = require('../models/user-model')
 
 // Twilio credentials
 const twilio = require('twilio'); // Import Twilio
-const accountSid = 'AC46dd4e4080e24bac82c0adbca033875e';
-const authToken = 'bf4452e3c6b0a26bfb1fc814091ba405';
+const accountSid = '';
+const authToken = '';
 const client = twilio(accountSid, authToken);
 
 exports.registerUser = async (req, res) => {
