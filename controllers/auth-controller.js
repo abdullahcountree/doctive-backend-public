@@ -1,10 +1,8 @@
 const User = require('../models/user-model')
 
 // Twilio credentials
-const twilio = require('twilio'); // Import Twilio
-const accountSid = '';
-const authToken = '';
-const client = twilio(accountSid, authToken);
+
+
 
 exports.registerUser = async (req, res) => {
     const { username, phoneNumber, role, about } = req.body;
@@ -47,23 +45,7 @@ exports.loginUser = async (req, res) => {
     const otp = Math.floor(100000 + Math.random() * 900000).toString();
     console.log(`OTP for ${phoneNumber}: ${otp}`); // Log OTP for debugging
 
-    // Send OTP via Twilio
-    try {
-        await client.messages.create({
-            body: `Your one-time verification code is: ${otp}`,
-            from: '+17472290247', // Replace with your Twilio number
-            to: phoneNumber,
-        });
 
-        // Store the OTP temporarily
-        user.otp = otp;
-        await user.save(); // Save user with new OTP
-
-        return res.status(200).send({ message: 'OTP sent' });
-    } catch (error) {
-        console.error('Error sending OTP:', error);
-        return res.status(500).send({ message: 'Failed to send OTP' });
-    }
 }
 
 exports.verifyOpt = async (req, res) => {
